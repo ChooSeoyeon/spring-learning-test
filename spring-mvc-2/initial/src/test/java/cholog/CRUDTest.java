@@ -22,6 +22,7 @@ class CRUDTest {
                 .then().log().all().extract();
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(response.header("location")).isEqualTo("/members/1");
     }
 
     @Test

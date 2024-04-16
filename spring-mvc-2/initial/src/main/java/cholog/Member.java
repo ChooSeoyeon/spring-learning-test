@@ -19,6 +19,10 @@ public class Member {
         this.age = age;
     }
 
+    public static Member of(String name, int age) {
+        return new Member(1L, name, age);
+    }
+
     public Long getId() {
         return id;
     }
