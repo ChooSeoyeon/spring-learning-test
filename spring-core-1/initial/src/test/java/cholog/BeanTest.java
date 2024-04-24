@@ -1,12 +1,12 @@
 package cholog;
 
+import static cholog.utils.ContextUtils.getApplicationContext;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cholog.bean.AutowiredBean;
 import cholog.bean.SpringBean;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
-
-import static cholog.utils.ContextUtils.getApplicationContext;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BeanTest {
 
@@ -15,6 +15,7 @@ public class BeanTest {
         ApplicationContext context = getApplicationContext();
         SpringBean springBean = context.getBean("springBean", SpringBean.class);
         assertThat(springBean).isNotNull();
+        assertThat(springBean.hello()).isEqualTo("Hello");
     }
 
     @Test
