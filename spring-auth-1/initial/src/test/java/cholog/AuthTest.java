@@ -1,5 +1,7 @@
 package cholog;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cholog.auth.dto.MemberResponse;
 import cholog.auth.dto.TokenRequest;
 import cholog.auth.dto.TokenResponse;
@@ -10,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AuthTest {
@@ -49,6 +49,7 @@ class AuthTest {
                 .param(PASSWORD_FIELD, PASSWORD)
                 .when().post("/login/session")
                 .then().log().all().extract().header("Set-Cookie").split(";")[0];
+        System.out.println("cookie = " + cookie);
 
         MemberResponse member = RestAssured
                 .given().log().all()
