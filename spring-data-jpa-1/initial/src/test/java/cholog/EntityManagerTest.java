@@ -18,15 +18,24 @@ public class EntityManagerTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     /**
      * 비영속 -> 영속
      */
     @Test
     void persist() {
         Customer customer = new Customer("Jack", "Bauer");
-        entityManager.persist(customer);
+        Customer savedCustomer = customerRepository.save(customer);
+        System.out.println("asdfasdfsdfasafsdf" + savedCustomer.getLastName());
 
-        assertThat(entityManager.find(Customer.class, 1L)).isNotNull();
+        entityManager.clear();
+
+        Customer customer1 = new Customer(customer.getId(), customer.getFirstName(), "hi");
+        Customer savedCustomer2 = customerRepository.save(customer1);
+        System.out.println("asdfasdfsdfasafsdf" + savedCustomer2.getLastName());
+
     }
 
     /**
