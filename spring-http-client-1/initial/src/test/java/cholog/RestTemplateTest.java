@@ -1,11 +1,11 @@
 package cholog;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 public class RestTemplateTest {
@@ -24,6 +24,7 @@ public class RestTemplateTest {
         Long nonExistentId = 9999L;
 
         assertThatThrownBy(() -> todoClient.getTodoById(nonExistentId))
-                .isInstanceOf(TodoException.NotFound.class);
+                .isInstanceOf(TodoException.NotFound.class)
+                .hasMessage("Todo not found with id: 9999");
     }
 }
